@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; /* Req para Text */
 
 public class RecordController : MonoBehaviour
 {
@@ -36,7 +36,6 @@ public class RecordController : MonoBehaviour
 
     public void CargarRecords(LitJson.JsonData respuesta) //
     {
-        Debug.Log("count records "+respuesta.Count);
         for (int i = 0; i < respuesta.Count; i++)
         {       
                 nombres[i].text = respuesta[i]["nombre"].ToString();

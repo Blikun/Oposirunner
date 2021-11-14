@@ -51,6 +51,7 @@ public class UIController : MonoBehaviour
     public void MostrarReintentar(bool yesno)
     {
         ReintentarBTN.gameObject.SetActive(yesno);
+        JuegoController.Pausar();
     }
 
     public void ActualizarUsuario(string nombrelogin, int recordlogin)

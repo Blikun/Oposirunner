@@ -25,7 +25,6 @@ public class GeneradorMapa : MonoBehaviour
     Vector3 posicion;
 
 
-
     void Start()
     {
         activo = true;
@@ -46,7 +45,8 @@ public class GeneradorMapa : MonoBehaviour
  
     void Update()
     {
-        if (transform.position.x < Spawn.position.x && activo == true)  // el Spawn se mueve fijo delante del personaje, child de camera.
+        if (transform.position.x < Spawn.position.x && activo == true)
+            // el Spawn se mueve fijo delante del personaje, child de camera.
         {   //si el SpawnPoint llega al generador
 
             transform.position = new Vector3(transform.position.x + offset + Distancia, transform.position.y, 0);
@@ -57,7 +57,8 @@ public class GeneradorMapa : MonoBehaviour
             Instantiate(Plataformas[i], posicion, transform.rotation);
             // Spawnea un chunk random en la posición del Generador.
 
-            offset = Plataformas[i].GetComponent<BoxCollider2D>().size.x; // offset mide igual que el ultimo chunk.
+            offset = Plataformas[i].GetComponent<BoxCollider2D>().size.x;
+            // offset mide igual que el ultimo chunk.
         }
     }
 

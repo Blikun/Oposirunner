@@ -18,8 +18,13 @@ public class TestController : MonoBehaviour
     public Text TextoD;
     public Text TextoDescripcion;
 
+    public Sprite spriteVerde;
+    public Sprite spriteRojo;
+    public Sprite spriteNormal;
+
     static LitJson.JsonData Banco;
     static int sizeBanco;
+    private bool activo = true;
     private int i;
     
     void Start()
@@ -35,6 +40,7 @@ public class TestController : MonoBehaviour
 
     public void CargarTest()
     {
+        desmarcar();
         JuegoController.Pausar();
         this.gameObject.SetActive(true);
 
@@ -65,21 +71,58 @@ public class TestController : MonoBehaviour
 
     public void comprobar(int num)
     {
-        if (Banco["preguntas"][i]["respuestas"][num]["es_correcta"].ToString() == "1")
+        if (Banco["preguntas"][i]["respuestas"][num]["es_correcta"].ToString() == "1" && activo == true)
         {
+            marcar(true, num);
             JuegoController.Acierto(true);
         }
-        else
+        else if (activo == true)
         {
+            marcar(false, num);
             JuegoController.Acierto(false);
         }
 
+        StartCoroutine(delay(2f));
+        
+    }
+
+    IEnumerator delay(float segundos)
+    {
+        activo = false;
+        yield return new WaitForSecondsRealtime(segundos);
+        activo = true;
         CerrarTest();
-        JuegoController.Reanudar();
+    }
+
+    public void marcar(bool TF, int num)
+    {
+        Sprite spritecolor;
+
+        if (TF) { spritecolor = spriteVerde; }
+        else { spritecolor = spriteRojo; } 
+
+        switch (num)
+        {
+            case 0: { BotonA.GetComponent<Image>().sprite = spritecolor; } break; //todo: mejorar .
+            case 1: { BotonB.GetComponent<Image>().sprite = spritecolor; } break;
+            case 2: { BotonC.GetComponent<Image>().sprite = spritecolor; } break;
+            case 3: { BotonD.GetComponent<Image>().sprite = spritecolor; } break;
+        }
+    }
+
+    public void desmarcar()
+    {
+        BotonA.GetComponent<Image>().sprite = spriteNormal;   //todo: mejorar 
+        BotonB.GetComponent<Image>().sprite = spriteNormal; 
+        BotonC.GetComponent<Image>().sprite = spriteNormal; 
+        BotonD.GetComponent<Image>().sprite = spriteNormal; 
     }
 
     public void CerrarTest()
     {
         this.gameObject.SetActive(false);
+        JuegoController.Reanudar();
     }
+
+
 }
