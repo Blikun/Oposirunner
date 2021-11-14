@@ -65,14 +65,12 @@ public class JuegoController : MonoBehaviour
 
     public void Salir()
     {
-        Pausar();
         TestController.CerrarTest();
         UIController.MostrarMenu(true);
     }
 
     public void GameOver()
     {
-        Pausar();
         puntos = PuntosController.PuntosActuales();
 
         if (nombre != "Invitado" && puntos > record)

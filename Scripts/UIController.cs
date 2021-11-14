@@ -40,12 +40,12 @@ public class UIController : MonoBehaviour
 
     public void MostrarMenu(bool yesno)
     {
-        
         FinBTN.gameObject.SetActive(!yesno);
         PausarBTN.gameObject.SetActive(!yesno);
         BloquearPausa(false);
         Menu.gameObject.SetActive(yesno);
         ReintentarBTN.gameObject.SetActive(false);
+        JuegoController.Pausar();
     }
 
     public void MostrarReintentar(bool yesno)
